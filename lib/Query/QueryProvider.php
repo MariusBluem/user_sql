@@ -110,6 +110,7 @@ class QueryProvider implements \ArrayAccess
         $usernameParam = Query::USERNAME_PARAM;
 
         $reverseActiveOpt = $this->properties[Opt::REVERSE_ACTIVE];
+        $reverseDisableOpt = $this->properties[Opt::REVERSE_DISABLE] ? " NOT " : " " ;
 
         $groupColumns
             = "g.$gGID AS gid, " .
@@ -144,7 +145,7 @@ class QueryProvider implements \ArrayAccess
                 "SELECT COUNT(u.$uUID) AS count " .
                 "FROM $user u " .
                 "WHERE u.$uUID LIKE :$searchParam " .
-                (empty($uDisabled) ? "" : "AND NOT u.$uDisabled"),
+                (empty($uDisabled) ? "" : "AND $reverseDisableOpt u.$uDisabled"),
 
             Query::FIND_GROUP =>
                 "SELECT $groupColumns " .
@@ -169,31 +170,31 @@ class QueryProvider implements \ArrayAccess
                 "SELECT $userColumns " .
                 "FROM $user u " .
                 "WHERE u.$uUID = :$uidParam " .
-                (empty($uDisabled) ? "" : "AND NOT u.$uDisabled"),
+                (empty($uDisabled) ? "" : "AND $reverseDisableOpt u.$uDisabled"),
 
             Query::FIND_USER_BY_USERNAME =>
                 "SELECT $userColumns, u.$uPassword AS password " .
                 "FROM $user u " .
                 "WHERE u.$uUsername = :$usernameParam " .
-                (empty($uDisabled) ? "" : "AND NOT u.$uDisabled"),
+                (empty($uDisabled) ? "" : "AND $reverseDisableOpt u.$uDisabled"),
 
             Query::FIND_USER_BY_USERNAME_CASE_INSENSITIVE =>
                 "SELECT $userColumns, u.$uPassword AS password " .
                 "FROM $user u " .
                 "WHERE lower(u.$uUsername) = lower(:$usernameParam) " .
-                (empty($uDisabled) ? "" : "AND NOT u.$uDisabled"),
+                (empty($uDisabled) ? "" : "AND $reverseDisableOpt u.$uDisabled"),
 
             Query::FIND_USER_BY_USERNAME_OR_EMAIL =>
                 "SELECT $userColumns, u.$uPassword AS password " .
                 "FROM $user u " .
                 "WHERE u.$uUsername = :$usernameParam OR u.$uEmail = :$emailParam " .
-                (empty($uDisabled) ? "" : "AND NOT u.$uDisabled"),
+                (empty($uDisabled) ? "" : "AND $reverseDisableOpt u.$uDisabled"),
 
             Query::FIND_USER_BY_USERNAME_OR_EMAIL_CASE_INSENSITIVE =>
                 "SELECT $userColumns, u.$uPassword AS password " .
                 "FROM $user u " .
                 "WHERE lower(u.$uUsername) = lower(:$usernameParam) OR lower(u.$uEmail) = lower(:$emailParam) " .
-                (empty($uDisabled) ? "" : "AND NOT u.$uDisabled"),
+                (empty($uDisabled) ? "" : "AND $reverseDisableOpt u.$uDisabled"),
 
             Query::FIND_USER_GROUPS =>
                 "SELECT $groupColumns " .
@@ -210,7 +211,7 @@ class QueryProvider implements \ArrayAccess
                 (empty($uName) ? "" : "OR u.$uName LIKE :$searchParam ") .
                 (empty($uEmail) ? "" : "OR u.$uEmail LIKE :$searchParam ") .
                 ")" .
-                (empty($uDisabled) ? "" : "AND NOT u.$uDisabled ") .
+                (empty($uDisabled) ? "" : "AND $reverseDisableOpt u.$uDisabled ") .
                 "ORDER BY u.$uUID",
 
             Query::UPDATE_DISPLAY_NAME =>
