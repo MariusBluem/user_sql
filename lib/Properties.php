@@ -176,7 +176,7 @@ class Properties implements \ArrayAccess
             $param, [
                 Opt::APPEND_SALT, Opt::CASE_INSENSITIVE_USERNAME, Opt::EMAIL_LOGIN,
                 Opt::NAME_CHANGE, Opt::PASSWORD_CHANGE, Opt::PREPEND_SALT,
-                Opt::PROVIDE_AVATAR, Opt::REVERSE_ACTIVE, Opt::SAFE_STORE,
+                Opt::PROVIDE_AVATAR, Opt::REVERSE_ACTIVE, Opt::REVERSE_DISABLE, Opt::SAFE_STORE,
                 Opt::USE_CACHE
             ]
         );

@@ -46,6 +46,7 @@ final class Opt
     const PROVIDE_AVATAR = "opt.provide_avatar";
     const QUOTA_SYNC = "opt.quota_sync";
     const REVERSE_ACTIVE = "opt.reverse_active";
+    const REVERSE_DISABLE = "opt.reverse_disable";
     const SAFE_STORE = "opt.safe_store";
     const USE_CACHE = "opt.use_cache";
 }

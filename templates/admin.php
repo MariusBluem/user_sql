@@ -115,7 +115,8 @@ function print_select_options(
                 print_checkbox_input($l, "opt-password_change", "Allow password change", $_["opt.password_change"]);
                 print_checkbox_input($l, "opt-provide_avatar", "Allow providing avatar", $_["opt.provide_avatar"]);
                 print_checkbox_input($l, "opt-case_insensitive_username", "Case-insensitive username", $_["opt.case_insensitive_username"]);
-                print_checkbox_input($l, "opt-reverse_active", "Reverse active column", $_["opt.reverse_active"]); ?>
+                print_checkbox_input($l, "opt-reverse_active", "Reverse active column", $_["opt.reverse_active"]);
+                print_checkbox_input($l, "opt-reverse_disable", "Reverse disable column", $_["opt.reverse_disable"]); ?>
                 <div class="button-right"><?php
                     print_checkbox_input($l, "opt-use_cache", "Use cache", $_["opt.use_cache"], false); ?>
                     <input type="submit" id="user_sql-clear_cache" value="<?php p($l->t("Clear cache")); ?>">
